@@ -50,7 +50,7 @@ export default function Home() {
         <h1 className="text-4xl font-bold">Welcome to Quivr</h1>
         <p className="text-lg text-gray-600">A place to find scripture for spiritual battles.</p>
         {/* Explain how to use it */}
-        <p className="text-lg text-gray-600">Select how you're feeling and the situation you're facing.</p>
+        <p className="text-lg text-gray-600">Select how you&apos;re feeling and the situation you&apos;re facing.</p>
         <p className="text-lg text-gray-600">Add any additional notes and click submit to receive relevant passages to help you through it.</p>
       </div>
 
@@ -73,7 +73,7 @@ export default function Home() {
         ))}
       </div>
 
-      <h1 className="text-xl font-bold text-center">What's the situation?</h1>
+      <h1 className="text-xl font-bold text-center">What&apos;s the situation?</h1>
       <div className="flex flex-wrap justify-center space-x-2">
         {situations.map((sit) => (
           <div
@@ -92,7 +92,7 @@ export default function Home() {
       {emotion && situation && (
         <div className="text-center">
           <p className="text-lg mt-4">
-            "I'm feeling <strong>{emotion}</strong> about my <strong>{situation}</strong>."
+            &quot;I&apos;m feeling <strong>{emotion}</strong> about my <strong>{situation}</strong>.&quot;
           </p>
         </div>
       )}
