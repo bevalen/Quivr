@@ -10,8 +10,8 @@ export default function Home() {
   const [passages, setPassages] = useState([]); // Always initialize as an array
   const [loading, setLoading] = useState(false);
 
-  const emotions = ["Angry", "Sad", "Anxious", "Happy", "Confused"];
-  const situations = ["Family", "Marriage", "Finances", "Work", "Health", "Relationships", "Decision Making"];
+  const emotions = ["Angry", "Sad", "Anxious", "Happy", "Confused", "Tempted"];
+  const situations = ["Family", "Marriage", "Finances", "Work", "Health", "Relationships", "Decision Making", "Sinful Desires"];
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -115,7 +115,7 @@ export default function Home() {
       {loading && <LoadingWheel />}
 
       {passages.length > 0 && (
-        <div className="grid gap-6 lg:grid-cols-3 mx-2 lg:mx-20">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3 mx-2 lg:mx-20">
           {passages.map((passage, index) => (
             <ScriptureCard
               key={index}
