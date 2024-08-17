@@ -11,7 +11,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
 
   const emotions = ["Angry", "Sad", "Anxious", "Happy", "Confused", "Tempted", "Doubt", "Weak Faith"];
-  const situations = ["Family", "Marriage", "Finances", "Work", "Health", "Relationships", "Decision Making", "Sinful Desires", "Faith"];
+  const situations = ["Family", "Marriage", "Children", "Finances", "Work", "Health", "Relationships", "Decision Making", "Sinful Desires", "Faith"];
 
   const handleSubmit = async () => {
     setLoading(true);
