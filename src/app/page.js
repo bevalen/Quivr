@@ -10,8 +10,8 @@ export default function Home() {
   const [passages, setPassages] = useState([]); // Always initialize as an array
   const [loading, setLoading] = useState(false);
 
-  const emotions = ["Angry", "Sad", "Anxious", "Happy", "Confused", "Tempted"];
-  const situations = ["Family", "Marriage", "Finances", "Work", "Health", "Relationships", "Decision Making", "Sinful Desires"];
+  const emotions = ["Angry", "Sad", "Anxious", "Happy", "Confused", "Tempted", "Doubt", "Weak Faith"];
+  const situations = ["Family", "Marriage", "Finances", "Work", "Health", "Relationships", "Decision Making", "Sinful Desires", "Faith"];
 
   const handleSubmit = async () => {
     setLoading(true);
