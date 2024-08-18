@@ -20,10 +20,10 @@ export default function Home() {
   const handleSubmit = async () => {
     setLoading(true);
     setPassages([]); // Clear previous passages and ensure it's an array
-  
+
     const generatedPrompt = `I feel ${emotion} about ${situation}. ${additionalNotes}`;
     setPrompt(generatedPrompt); // Save the prompt to state
-  
+
     try {
       const res = await fetch("/api/openai/scripture", {
         method: "POST",
@@ -32,20 +32,20 @@ export default function Home() {
         },
         body: JSON.stringify({ prompt: generatedPrompt }),
       });
-  
+
       const data = await res.json();
       const parsedResponse = JSON.parse(data.response);
       console.log('Parsed Passages:', parsedResponse.passages); // Log the passages array
-  
+
       setPassages(parsedResponse.passages || []); // Ensure passages is always an array
-  
+
     } catch (error) {
       console.error("Error fetching the response:", error);
       setPassages([{ reference: "Error", version: "", content: "Something went wrong." }]);
     }
-  
+
     setLoading(false);
-  };  
+  };
 
   const handleChatClick = (cardData) => {
     setChatData(cardData);
@@ -129,25 +129,28 @@ export default function Home() {
       {loading && <LoadingWheel />}
 
       {passages.length > 0 && (
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3 mx-2 lg:mx-20">
-          {passages.map((passage, index) => (
-            <ScriptureCard
-              key={index}
-              reference={passage.reference}
-              version={passage.version}
-              content={passage.content}
-              handleChatClick={handleChatClick}
-            />
-          ))}
+        <div className="mx-2 lg:mx-20">
+          <h2 className="text-xl text-center font-semibold mb-4">Select a Passage to Dive Deeper</h2>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {passages.map((passage, index) => (
+              <ScriptureCard
+                key={index}
+                reference={passage.reference}
+                version={passage.version}
+                content={passage.content}
+                handleChatClick={handleChatClick}
+              />
+            ))}
+          </div>
         </div>
       )}
-        
-        {/* chatModal && Show ScriptureChat.js */}
+
+      {/* chatModal && Show ScriptureChat.js */}
       {chatModal && (
         <ScriptureChat
-        chatData={chatData}
-        prompt={prompt}
-        handleCloseChatModal={handleCloseChatModal}
+          chatData={chatData}
+          prompt={prompt}
+          handleCloseChatModal={handleCloseChatModal}
         />
       )}
     </div>
