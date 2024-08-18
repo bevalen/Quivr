@@ -2,6 +2,7 @@
 import { useState } from "react";
 import ScriptureCard from './components/ScriptureCard'; // Adjust the path as needed
 import LoadingWheel from "./components/LoadingWheel";
+import ScriptureChat from "./components/ScriptureChat";
 
 export default function Home() {
   const [emotion, setEmotion] = useState("");
@@ -9,6 +10,9 @@ export default function Home() {
   const [additionalNotes, setAdditionalNotes] = useState("");
   const [passages, setPassages] = useState([]); // Always initialize as an array
   const [loading, setLoading] = useState(false);
+  const [chatModal, setChatModal] = useState(false);
+  const [chatData, setChatData] = useState({});
+  const [prompt, setPrompt] = useState(""); // Add this line
 
   const emotions = ["Angry", "Sad", "Anxious", "Happy", "Confused", "Tempted", "Doubt", "Weak Faith"];
   const situations = ["Family", "Marriage", "Children", "Finances", "Work", "Health", "Relationships", "Decision Making", "Sinful Desires", "Faith"];
@@ -16,31 +20,41 @@ export default function Home() {
   const handleSubmit = async () => {
     setLoading(true);
     setPassages([]); // Clear previous passages and ensure it's an array
-
-    const prompt = `I feel ${emotion} about ${situation}. ${additionalNotes}`;
-
+  
+    const generatedPrompt = `I feel ${emotion} about ${situation}. ${additionalNotes}`;
+    setPrompt(generatedPrompt); // Save the prompt to state
+  
     try {
-      const res = await fetch("/api/openai", {
+      const res = await fetch("/api/openai/scripture", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({ prompt: generatedPrompt }),
       });
-
+  
       const data = await res.json();
       const parsedResponse = JSON.parse(data.response);
       console.log('Parsed Passages:', parsedResponse.passages); // Log the passages array
-
+  
       setPassages(parsedResponse.passages || []); // Ensure passages is always an array
-
+  
     } catch (error) {
       console.error("Error fetching the response:", error);
       setPassages([{ reference: "Error", version: "", content: "Something went wrong." }]);
     }
-
+  
     setLoading(false);
-  };
+  };  
+
+  const handleChatClick = (cardData) => {
+    setChatData(cardData);
+    setChatModal(true);
+  }
+
+  const handleCloseChatModal = () => {
+    setChatModal(false);
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen space-y-4 py-10 px-4 lg:px-0">
@@ -122,9 +136,19 @@ export default function Home() {
               reference={passage.reference}
               version={passage.version}
               content={passage.content}
+              handleChatClick={handleChatClick}
             />
           ))}
         </div>
+      )}
+        
+        {/* chatModal && Show ScriptureChat.js */}
+      {chatModal && (
+        <ScriptureChat
+        chatData={chatData}
+        prompt={prompt}
+        handleCloseChatModal={handleCloseChatModal}
+        />
       )}
     </div>
   );
