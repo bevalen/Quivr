@@ -11,7 +11,7 @@ export default function Home() {
   const [situation, setSituation] = useState("");
   const [additionalNotes, setAdditionalNotes] = useState("");
   const [passages, setPassages] = useState([]); // Always initialize as an array
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [chatModal, setChatModal] = useState(false);
   const [chatData, setChatData] = useState({});
   const [prompt, setPrompt] = useState(""); // Add this line
@@ -140,7 +140,6 @@ export default function Home() {
       >
         {loading ? "Loading..." : "Submit"}
       </button>
-      {loading && <p>Quivr is looking for scripture passages..</p>}
       {loading && <LoadingScriptureCards ref={loadingRef} />}
 
       {passages.length > 0 && (
