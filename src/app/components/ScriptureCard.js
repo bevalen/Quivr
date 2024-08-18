@@ -2,18 +2,24 @@ import { Bars3BottomRightIcon } from '@heroicons/react/24/solid';
 
 export default function ScriptureCard({ reference, version, content, handleChatClick }) {
   return (
-    <div className="bg-gray-200 p-4 w-96 rounded-lg shadow relative">
-      <button
-        onClick={() => handleChatClick({ reference, version, content })}
-        className="absolute top-2 right-2 p-2 rounded-xl text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition duration-300 ease-out"
-      >
-        <Bars3BottomRightIcon className="h-6 w-6" />
-      </button>
-      <h2 className="text-xl font-semibold">{reference}</h2>
-      <p className="text-sm text-gray-600">{version}</p>
-      {/* Divider */}
-      <div className="border-b border-gray-300 my-4"></div>
-      <p className="mt-2">{content}</p>
-    </div>
+    <button
+      onClick={() => handleChatClick({ reference, version, content })}
+      className="bg-gray-200 p-4 w-full sm:w-96 rounded-lg shadow relative transition-transform transform hover:scale-105 duration-300 ease-out focus:outline-none text-left block h-full"
+    >
+      <div className="flex flex-col h-full justify-between">
+        <div>
+          <div className="flex flex-col pr-10">
+            <h2 className="text-xl font-semibold">{reference}</h2>
+            <p className="text-sm text-gray-600">{version}</p>
+          </div>
+          {/* Divider */}
+          <div className="border-b border-gray-300 my-4"></div>
+          <p className="mt-2">{content}</p>
+        </div>
+        <div className="absolute top-2 right-2 p-2 rounded-xl text-gray-600">
+          <Bars3BottomRightIcon className="h-6 w-6" />
+        </div>
+      </div>
+    </button>
   );
 }

@@ -14,7 +14,7 @@ export default function ScriptureChat({ chatData, prompt, handleCloseChatModal }
         { role: "user", content: prompt },
         { role: "assistant", content: `Here's a scripture passage that may help: ${chatData.reference}: ${chatData.content}` },
         { role: "user", content: "Can you provide some commentary on the context and meaning of this passage, followed by some practical application for my situation?" },
-        { role: "user", content: "Format it as intro, context, meaning, and then practical application." },
+        { role: "user", content: "Format it as intro, context, meaning, practical application and then final thoughts." },
         { role: "assistant", content: "Here's some commentary on this passage:" },
     ];
 
