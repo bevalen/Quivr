@@ -1,8 +1,10 @@
-"use client";
-import { useState } from "react";
+"use client"; // Add this line at the top
+
+import { useState, useRef, useEffect } from "react";
 import ScriptureCard from './components/ScriptureCard'; // Adjust the path as needed
 import LoadingWheel from "./components/LoadingWheel";
 import ScriptureChat from "./components/ScriptureChat";
+import LoadingScriptureCards from "./components/LoadingScriptureCards";
 
 export default function Home() {
   const [emotion, setEmotion] = useState("");
@@ -13,6 +15,8 @@ export default function Home() {
   const [chatModal, setChatModal] = useState(false);
   const [chatData, setChatData] = useState({});
   const [prompt, setPrompt] = useState(""); // Add this line
+
+  const loadingRef = useRef(null); // Create a ref for the loading component
 
   const emotions = ["Angry", "Sad", "Anxious", "Happy", "Confused", "Tempted", "Doubt", "Weak Faith"];
   const situations = ["Family", "Marriage", "Children", "Finances", "Work", "Health", "Relationships", "Decision Making", "Sinful Desires", "Faith"];
@@ -46,6 +50,17 @@ export default function Home() {
 
     setLoading(false);
   };
+
+  // useEffect(() => {
+  //   if (loading && loadingRef.current) {
+  //     setTimeout(() => {
+  //       loadingRef.current.scrollIntoView({
+  //         behavior: 'smooth',
+  //         block: 'start',
+  //       });
+  //     }, 100); // Adjust the delay as needed (100ms is a good starting point)
+  //   }
+  // }, [loading]);
 
   const handleChatClick = (cardData) => {
     setChatData(cardData);
@@ -126,11 +141,11 @@ export default function Home() {
         {loading ? "Loading..." : "Submit"}
       </button>
       {loading && <p>Quivr is looking for scripture passages..</p>}
-      {loading && <LoadingWheel />}
+      {loading && <LoadingScriptureCards ref={loadingRef} />}
 
       {passages.length > 0 && (
         <div className="mx-2 lg:mx-20">
-          <h2 className="text-xl text-center font-semibold mb-4">Select a Passage to Dive Deeper</h2>
+          <h2 className="text-xl text-center font-semibold mb-10 mt-4">Select a Passage to Dive Deeper</h2>
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {passages.map((passage, index) => (
               <ScriptureCard
