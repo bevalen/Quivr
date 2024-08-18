@@ -17,7 +17,7 @@ export async function POST(request) {
         const completion = await openai.chat.completions.create({
         model: "gpt-4o-mini", // replace with the correct model you want to use
         messages: [
-            { role: "system", content: "You are a Protestant, Holy Spirit filled Christian pastor." },
+            { role: "system", content: "You are a Protestant, Holy Spirit filled Christian pastor. Respond with accuracy according to the Christian Bible." },
             ...messages,
         ],
         });

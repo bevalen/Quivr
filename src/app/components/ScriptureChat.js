@@ -13,8 +13,9 @@ export default function ScriptureChat({ chatData, prompt, handleCloseChatModal }
     const messages = [
         { role: "user", content: prompt },
         { role: "assistant", content: `Here's a scripture passage that may help: ${chatData.reference}: ${chatData.content}` },
-        { role: "user", content: "Can you briefly help me understand how to apply that to my situation?" },
-        { role: "assistant", content: "Here's how you can apply it to your situation:" },
+        { role: "user", content: "Can you provide some commentary on the context and meaning of this passage, followed by some practical application for my situation?" },
+        { role: "user", content: "Format it as intro, context, meaning, and then practical application." },
+        { role: "assistant", content: "Here's some commentary on this passage:" },
     ];
 
     const handleChat = async () => {
@@ -53,7 +54,7 @@ export default function ScriptureChat({ chatData, prompt, handleCloseChatModal }
             <div className="relative z-10 bg-white border shadow-lg rounded-lg p-4 w-full max-w-md sm:max-w-lg lg:max-w-2xl mx-auto">
                 <div className="flex justify-between items-center mb-4">
                     <div className="flex-1">
-                        <h3 className="text-lg sm:text-xl font-semibold">Practical Application</h3>
+                    <h3 className="text-lg sm:text-xl font-semibold">Let&apos;s Dive Deeper</h3>
                         {/* Add the chatData.reference here */}
                         <p className="text-sm sm:text-base text-gray-600 mt-1">{chatData.reference}</p>
                     </div>

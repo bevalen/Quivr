@@ -1,4 +1,4 @@
-import { ChatBubbleBottomCenterTextIcon, QuestionMarkCircleIcon } from '@heroicons/react/24/solid';
+import { Bars3BottomRightIcon } from '@heroicons/react/24/solid';
 
 export default function ScriptureCard({ reference, version, content, handleChatClick }) {
   return (
@@ -7,7 +7,7 @@ export default function ScriptureCard({ reference, version, content, handleChatC
         onClick={() => handleChatClick({ reference, version, content })}
         className="absolute top-2 right-2 p-2 rounded-xl text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition duration-300 ease-out"
       >
-        <QuestionMarkCircleIcon className="h-6 w-6" />
+        <Bars3BottomRightIcon className="h-6 w-6" />
       </button>
       <h2 className="text-xl font-semibold">{reference}</h2>
       <p className="text-sm text-gray-600">{version}</p>
