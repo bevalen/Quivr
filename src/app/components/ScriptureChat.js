@@ -9,6 +9,7 @@ export default function ScriptureChat({ chatData, prompt, handleCloseChatModal }
 
     const [loading, setLoading] = useState(true);
     const [response, setResponse] = useState("");
+    const [error, setError] = useState(null);
 
     const messages = [
         { role: "user", content: prompt },
@@ -28,11 +29,16 @@ export default function ScriptureChat({ chatData, prompt, handleCloseChatModal }
                 body: JSON.stringify({ messages }),
             });
 
+            if (!res.ok) {
+                throw new Error("Network response was not ok");
+            }
+
             const data = await res.json();
             console.log('Chat Response:', data.response);
             setResponse(data.response);
         } catch (error) {
             console.error("Error fetching the response:", error);
+            setError("Oops! Something went wrong. Close this window and try again.");
         } finally {
             setLoading(false);
         }
@@ -63,10 +69,14 @@ export default function ScriptureChat({ chatData, prompt, handleCloseChatModal }
                     </button>
                 </div>
 
-                {/* Display loading wheel or the response */}
+                {/* Display loading wheel, error message, or the response */}
                 {loading ? (
                     <div className="flex justify-center items-center">
                         <LoadingWheel />
+                    </div>
+                ) : error ? (
+                    <div className="text-center text-red-500">
+                        <p>{error}</p>
                     </div>
                 ) : (
                     <div className="max-h-96 sm:max-h-[32rem] overflow-y-auto">

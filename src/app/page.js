@@ -45,7 +45,7 @@ export default function Home() {
 
     } catch (error) {
       console.error("Error fetching the response:", error);
-      setPassages([{ reference: "Error", version: "", content: "Something went wrong." }]);
+      setPassages([{ reference: "Error", version: "", content: "Something went wrong, please try again" }]);
     }
 
     setLoading(false);
