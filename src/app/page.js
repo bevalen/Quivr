@@ -11,7 +11,7 @@ export default function Home() {
   const [situation, setSituation] = useState("");
   const [additionalNotes, setAdditionalNotes] = useState("");
   const [passages, setPassages] = useState([]); // Always initialize as an array
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [chatModal, setChatModal] = useState(false);
   const [chatData, setChatData] = useState({});
   const [prompt, setPrompt] = useState(""); // Add this line
