@@ -1,4 +1,4 @@
-import { Bars3BottomRightIcon } from '@heroicons/react/24/solid';
+import { Bars3BottomRightIcon, ChevronRightIcon, ChevronDoubleRightIcon } from '@heroicons/react/24/solid';
 
 export default function ScriptureCard({ reference, version, content, handleChatClick }) {
   return (
@@ -17,7 +17,7 @@ export default function ScriptureCard({ reference, version, content, handleChatC
           <p className="mt-2">{content}</p>
         </div>
         <div className="absolute top-2 right-2 p-2 rounded-xl text-gray-600">
-          <Bars3BottomRightIcon className="h-6 w-6" />
+          <ChevronRightIcon className="h-6 w-6" />
         </div>
       </div>
     </button>

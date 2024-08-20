@@ -18,8 +18,54 @@ export default function Home() {
 
   const loadingRef = useRef(null); // Create a ref for the loading component
 
-  const emotions = ["Angry", "Sad", "Anxious", "Happy", "Confused", "Tempted", "Doubt", "Weak Faith"];
-  const situations = ["Family", "Marriage", "Children", "Finances", "Work", "Health", "Relationships", "Decision Making", "Sinful Desires", "Faith"];
+  const emotions = [
+    "Angry",
+    "Sad",
+    "Anxious",
+    "Happy",
+    "Confused",
+    "Tempted",
+    "Doubt",
+    "Weak Faith",
+    "Lonely",
+    "Guilty",
+    "Overwhelmed",
+    "Grateful",
+    "Hopeful",
+    "Frustrated",
+    "Afraid",
+    "Insecure",
+    "Discouraged",
+    "Excited",
+    "Ashamed"
+  ];
+
+  const situations = [
+    "Family",
+    "Marriage",
+    "Children",
+    "Finances",
+    "Work",
+    "Health",
+    "Relationships",
+    "Decision Making",
+    "Sinful Desires",
+    "Faith",
+    "Friendships",
+    "Loss",
+    "Spiritual Growth",
+    "Temptation",
+    "Purpose",
+    "Future",
+    "Ministry",
+    "Trust in God",
+    "Forgiveness",
+    "Waiting on God",
+    "Stress",
+    "Uncertainty",
+    "Obedience"
+  ];
+
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -116,15 +162,8 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Conditional Emotions and Situation Prompt */}
-
-      {emotion && situation && (
-        <div className="text-center">
-          <p className="text-lg mt-4">
-            &quot;I&apos;m feeling <strong>{emotion}</strong> about my <strong>{situation}</strong>.&quot;
-          </p>
-        </div>
-      )}
+      {/* Header for additional notes */}
+      <h1 className="text-xl font-bold text-center mt-6">Additional Details</h1>
 
       <textarea
         value={additionalNotes}
@@ -132,6 +171,16 @@ export default function Home() {
         placeholder="Can you share more?"
         className="border rounded px-4 py-2 w-full max-w-md h-24 mt-4"
       />
+
+            {/* Conditional Emotions and Situation Prompt */}
+
+            {emotion && situation && (
+        <div className="text-center">
+          <p className="text-lg mt-4">
+            &quot;I&apos;m feeling <strong>{emotion}</strong> about my <strong>{situation}</strong>.&quot;
+          </p>
+        </div>
+      )}
 
       <button
         onClick={handleSubmit}
