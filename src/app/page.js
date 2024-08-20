@@ -144,6 +144,16 @@ export default function Home() {
     }
   }, [situation]);
 
+  // If chadModal is true, stop the ability to scroll on this page
+
+  useEffect(() => {
+    if (chatModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [chatModal]);
+
   const handleChatClick = (cardData) => {
     setChatData(cardData);
     setChatModal(true);
