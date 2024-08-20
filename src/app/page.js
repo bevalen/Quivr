@@ -17,6 +17,10 @@ export default function Home() {
   const [prompt, setPrompt] = useState(""); // Add this line
 
   const loadingRef = useRef(null); // Create a ref for the loading component
+  const emotionRef = useRef(null); // Ref for the emotion section
+  const situationRef = useRef(null); // Ref for the situation section
+
+  const [mobileDevice, setMobileDevice] = useState(false);
 
   const emotions = [
     "Angry",
@@ -67,6 +71,19 @@ export default function Home() {
     "Obedience"
   ];
 
+  // If mobile device, set mobileDevice to true
+
+  useEffect(() => {
+    const handleResize = () => {
+      setMobileDevice(window.innerWidth <= 768); // Set true if width is 768px or less, false otherwise
+    };
+
+    handleResize(); // Check the screen size initially
+
+    window.addEventListener("resize", handleResize); // Add resize event listener
+    return () => window.removeEventListener("resize", handleResize); // Clean up the event listener on unmount
+  }, []);
+
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -109,6 +126,24 @@ export default function Home() {
     }
   }, [loading]);
 
+  useEffect(() => {
+    if (emotion && emotionRef.current) {
+      emotionRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+      });
+    }
+  }, [emotion]);
+
+  useEffect(() => {
+    if (situation && situationRef.current) {
+      situationRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+      });
+    }
+  }, [situation]);
+
   const handleChatClick = (cardData) => {
     setChatData(cardData);
     setChatModal(true);
@@ -149,7 +184,7 @@ export default function Home() {
         ))}
       </div>
 
-      <h1 className="text-xl font-bold text-center">What&apos;s the situation?</h1>
+      <h1 className="text-xl font-bold text-center">{emotion ? `What are you feeling ${emotion} about?` : `What circumstance are you facing?`}</h1>
       <div className="flex flex-wrap justify-center space-x-2">
         {situations.map((sit) => (
           <div
@@ -163,6 +198,19 @@ export default function Home() {
         ))}
       </div>
 
+      {/* Conditional Emotions and Situation Prompt */}
+
+      {emotion && situation && (
+        <div className="text-center">
+          <p className="text-lg mt-4">
+            &quot;I&apos;m feeling <strong>{emotion}</strong> about my <strong>{situation}</strong>.&quot;
+          </p>
+        </div>
+      )}
+
+      {/* Scroll ref after emotion is clicked */}
+      {mobileDevice && <div ref={emotionRef}></div>}
+
       {/* Header for additional notes */}
       <h1 className="text-xl font-bold text-center mt-6">Additional Details</h1>
 
@@ -173,16 +221,6 @@ export default function Home() {
         className="border rounded px-4 py-2 w-full max-w-md h-24 mt-4"
       />
 
-            {/* Conditional Emotions and Situation Prompt */}
-
-            {emotion && situation && (
-        <div className="text-center">
-          <p className="text-lg mt-4">
-            &quot;I&apos;m feeling <strong>{emotion}</strong> about my <strong>{situation}</strong>.&quot;
-          </p>
-        </div>
-      )}
-
       <button
         onClick={handleSubmit}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -190,6 +228,9 @@ export default function Home() {
       >
         {loading ? "Loading..." : "Submit"}
       </button>
+
+      {/* Ref to scroll into view after Situation */}
+      <div ref={situationRef}></div>
 
       {/* Ref to scroll into view */}
       <div ref={loadingRef}></div>
