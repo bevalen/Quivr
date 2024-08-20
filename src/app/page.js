@@ -51,16 +51,16 @@ export default function Home() {
     setLoading(false);
   };
 
-  // useEffect(() => {
-  //   if (loading && loadingRef.current) {
-  //     setTimeout(() => {
-  //       loadingRef.current.scrollIntoView({
-  //         behavior: 'smooth',
-  //         block: 'start',
-  //       });
-  //     }, 100); // Adjust the delay as needed (100ms is a good starting point)
-  //   }
-  // }, [loading]);
+  useEffect(() => {
+    if (loading && loadingRef.current) {
+      setTimeout(() => {
+        loadingRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }, 100); // Adjust the delay as needed (100ms is a good starting point)
+    }
+  }, [loading]);
 
   const handleChatClick = (cardData) => {
     setChatData(cardData);
@@ -140,6 +140,10 @@ export default function Home() {
       >
         {loading ? "Loading..." : "Submit"}
       </button>
+
+      {/* Ref to scroll into view */}
+      <div ref={loadingRef}></div>
+
       {loading && <LoadingScriptureCards ref={loadingRef} />}
 
       {passages.length > 0 && (
@@ -167,6 +171,7 @@ export default function Home() {
           handleCloseChatModal={handleCloseChatModal}
         />
       )}
+
     </div>
   );
 }
