@@ -21,6 +21,7 @@ export default function Home() {
   const emotions = [
     "Angry",
     "Sad",
+    "Hurt",
     "Anxious",
     "Happy",
     "Confused",
