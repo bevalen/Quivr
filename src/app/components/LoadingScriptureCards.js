@@ -1,3 +1,5 @@
+import { ChevronRightIcon } from '@heroicons/react/24/solid';
+
 export default function LoadingScriptureCards() {
     return (
         <div className="flex justify-center items-center min-h-screen">
@@ -28,7 +30,9 @@ export default function LoadingScriptureCards() {
                                         <div className="h-4 bg-gray-300 rounded w-1/4"></div>
                                     </div>
                                 </div>
-                                <div className="absolute top-2 right-2 p-2 rounded-xl bg-gray-300 h-6 w-6"></div>
+                                <div className="absolute top-2 right-2 p-2 rounded-xl text-gray-600">
+                                    <ChevronRightIcon className="h-6 w-6" />
+                                </div>
                             </div>
                         </div>
                     ))}
